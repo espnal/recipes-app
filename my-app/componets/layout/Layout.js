@@ -1,14 +1,16 @@
 import React from "react";
 import classes from "./Layout.module.scss";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
 function Layout({children}){
     return(
     <>
     <div className={classes.container}>
-        <h1>This is header</h1>
+        <Navbar/>
         {children}
     </div>
     
-    <h1>This is footer</h1>
+    <Footer/>
     </>)
 }
 export default Layout;

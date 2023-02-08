@@ -1,17 +1,30 @@
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
-import classes from "./Navbar.module.scss"
+import classes from "./Navbar.module.scss";
+import Logo from "../../images/logo-preview.png";
+
 function Navbar() {
 return (
-    <nav>
+    <nav class={classes.navbar}>
         <Link href="/">
-            <a class={classes.logo}>
-                <Image src={Logo}>
-
-                </Image>
-            </a>
+            <div class={classes.logo}>
+                <Image src={Logo}/>
+            </div>
         </Link>
+        <ul class={classes.navLinks}>
+            <li>
+                <Link href={"/meals"}>
+                    Meals
+                </Link>
+            </li>
+            <li>
+                <Link href={"/meals"}>
+                    Saved lists
+                </Link>
+            </li>
+
+        </ul>
     </nav>
 )
 }
