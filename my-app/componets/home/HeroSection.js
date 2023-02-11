@@ -3,6 +3,7 @@ import classes from '../home/HeroSection.module.scss'
 import HeroImg from '../../images/banner.jpg';
 import Text from '../text/Text';
 import Image from 'next/image';
+import ButtonWithLink from '../buttons/Button';
 
 export default function HeroSection() {
   return (
@@ -18,7 +19,7 @@ export default function HeroSection() {
                 </h1>
                 <Text> A listing websites of meal</Text>
                 <div className={classes.hero__buttons}>
-                    <a>Text</a>
+                    <ButtonWithLink link={'/meals'} variant="primary">Text</ButtonWithLink>
                 </div>
             </div>
             <div className={classes.hero__img}>
