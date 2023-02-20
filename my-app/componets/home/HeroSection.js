@@ -19,7 +19,8 @@ export default function HeroSection() {
                 </h1>
                 <Text> A listing websites of meal</Text>
                 <div className={classes.hero__buttons}>
-                    <ButtonWithLink link={'/meals'} variant="primary">Text</ButtonWithLink>
+                    <ButtonWithLink link={'/meals'} variant="primary">Explore Meals</ButtonWithLink>
+                    <ButtonWithLink link={'/savedMeals'}>Saved Meals</ButtonWithLink>
                 </div>
             </div>
             <div className={classes.hero__img}>
