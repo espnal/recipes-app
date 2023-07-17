@@ -6,7 +6,9 @@ import CategoryItem from './CategoryItem';
 function Categories({
     categories, 
     categoriesIsLoading, 
-    categoriesIsError
+    categoriesIsError,
+    selectedCategory,
+    setSelectedCategory
 }) {
   if(categoriesIsError){
     return ("Error")
@@ -18,7 +20,11 @@ function Categories({
     <div className={classes.categories__container}>
       {categories && categories.map((item)=>
       (
-      <CategoryItem category={item} key={item.idCategory}/>
+      <CategoryItem 
+      category={item} 
+      key={item.idCategory} 
+      selectedCategory={selectedCategory} 
+      onclickHandler={()=>setSelectedCategory(item.strCategory)}/>
       )
       )}
     </div>
