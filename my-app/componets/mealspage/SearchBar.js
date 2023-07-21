@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './searchBar.module.scss'
+import classes from './SearchBar.module.scss'
 function SearchBar({searchText, setSearchText}) {
   return (
     <input className={classes.input}
