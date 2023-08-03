@@ -9,7 +9,7 @@ function Categories({
     categoriesIsError,
     selectedCategory,
     setSelectedCategory,
-    setQuery
+    setQuery,
 }) {
   if(categoriesIsError){
     return ("Error")
@@ -26,9 +26,9 @@ function Categories({
       key={item.idCategory} 
       selectedCategory={selectedCategory} 
       onclickHandler={()=>{
-        setSelectedCategory(item.strCategory)
-      }
-        }/>
+        setSelectedCategory(item.strCategory);
+        setQuery("");
+      }}/>
       )
       )}
     </div>
