@@ -8,6 +8,7 @@ import Text from '../../components/text/Text';
 import Image from 'next/image';
 import Title from '../../components/text/Title';
 import PointText from  '../../components/text/PointText';
+import IngredientsTable from '../../components/mealspage/IngredientsTable';
 
 
 const getSingleMeal = async ({queryKey}) => {
@@ -37,8 +38,15 @@ function singleMealPage() {
 
     const ingredients = Object.keys(data).filter((key) => 
     key.startsWith('strIngredient')).filter((key) => key[data] !== "" && key[data] !== null)
-    console.log(ingredients)
-    
+  
+    const ingredientsWithMeasures = ingredients.map((key, index) => (
+      {
+        index: index + 1,
+        ingredient: data[key],
+        measure: data[`strMeasure${index + 1}`]
+      }
+    ))
+
   return (
     <div className={classes.pageWrapper}>
       <div>
@@ -63,6 +71,9 @@ function singleMealPage() {
           {' '}
           {data?.strTags?.split(',').join(', ')}
         </PointText>
+        <div className={classes.ingredientsTable}>
+          <IngredientsTable ingredientsWithMeasures={ingredientsWithMeasures}/>
+        </div>
       </div>
     </div>
   )
