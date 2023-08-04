@@ -37,7 +37,7 @@ function singleMealPage() {
     }
 
     const ingredients = Object.keys(data).filter((key) => 
-    key.startsWith('strIngredient')).filter((key) => key[data] !== "" && key[data] !== null)
+    key.startsWith('strIngredient')).filter((key) => data[key] !== "" && data[key] !== null)
   
     const ingredientsWithMeasures = ingredients.map((key, index) => (
       {
@@ -73,6 +73,15 @@ function singleMealPage() {
         </PointText>
         <div className={classes.ingredientsTable}>
           <IngredientsTable ingredientsWithMeasures={ingredientsWithMeasures}/>
+        </div>
+        <div className={classes.instrutions}>
+        <Title>Instructions</Title>
+        {data.strInstructions.split('.').filter((sentence)=> sentence !== "").map((sentece)=>(
+          <PointText>
+            {sentece}
+            .
+          </PointText>
+        ))}
         </div>
       </div>
     </div>
