@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import classes from './meals.module.scss';
 import {useRouter} from 'next/router'
 import { useQuery } from '@tanstack/react-query';
@@ -9,7 +9,8 @@ import Image from 'next/image';
 import Title from '../../components/text/Title';
 import PointText from  '../../components/text/PointText';
 import IngredientsTable from '../../components/mealspage/IngredientsTable';
-
+import {Button} from '../../components/buttons/Button';
+import toast from 'react-hot-toast';
 
 const getSingleMeal = async ({queryKey}) => {
 
@@ -18,10 +19,22 @@ const getSingleMeal = async ({queryKey}) => {
 }
 
 function singleMealPage() {
-
+    const [isSaved, setIsSaved] = React.useState(false);
     const router = useRouter();
     const {id} = router.query;
+
     const {data, isLoading, isError, error} = useQuery(['singleMeal', id], getSingleMeal)
+
+    useEffect(()=>{
+      if(localStorage.getItem('savedMeals')){
+        const savedMeals = JSON.parse(localStorage.getItem('savedMeals'))
+      if(savedMeals.includes(id)){
+        setIsSaved(true)
+      }else{
+        setIsSaved(false)
+      }
+      }
+    },[id])
 
     if(isError) {
         return(
@@ -46,44 +59,62 @@ function singleMealPage() {
         measure: data[`strMeasure${index + 1}`]
       }
     ))
-
+    const handleSaveButton = () => {
+      const savedMeals = JSON.parse(localStorage.getItem('savedMeals')) || [];
+    
+      if (!savedMeals.includes(data.idMeal)) {
+        savedMeals.push(data.idMeal);
+        localStorage.setItem('savedMeals', JSON.stringify(savedMeals));
+        toast.success('Meal Saved Successfully');
+      } else {
+        const updatedMeals = savedMeals.filter((meal) => meal !== data.idMeal);
+        localStorage.setItem('savedMeals', JSON.stringify(updatedMeals));
+        toast.error('Meal Removed Successfully');
+      }
+    
+      setIsSaved(!savedMeals.includes(data.idMeal));
+    };
+    
   return (
     <div className={classes.pageWrapper}>
-      <div>
-        <Image src={data.strMealThumb} height={300} width={300}>
-
-        </Image>
-      </div>
-      <div className={classes.info}>
-        <Title variant={"primary"}>{data.strMeal}</Title>
-        <PointText className={classes.infText}>
-          Category:
-          {' '}
-          {data.strCategory}
-        </PointText>
-        <PointText className={classes.infText}>
-          Area:
-          {' '}
-          {data.strArea}
-        </PointText>
-        <PointText className={classes.infText}>
-          Tags:
-          {' '}
-          {data?.strTags?.split(',').join(', ')}
-        </PointText>
-        <div className={classes.ingredientsTable}>
-          <IngredientsTable ingredientsWithMeasures={ingredientsWithMeasures}/>
+      <div className={classes.topContainer}>
+        <div className={classes.img}>
+          <Image src={data.strMealThumb} height={300} width={300}>
+          </Image>
         </div>
+        <div className={classes.info}>
+          <Title variant={"primary"}>{data.strMeal}</Title>
+          <PointText className={classes.infText}>
+            Category:
+            {' '}
+            {data.strCategory}
+          </PointText>
+          <PointText className={classes.infText}>
+            Area:
+            {' '}
+            {data.strArea}
+          </PointText>
+          <PointText className={classes.infText}>
+            Tags:
+            {' '}
+            {data?.strTags?.split(',').join(', ')}
+          </PointText>
+          <Button variant="primary" className={classes.saveButton} onClick={handleSaveButton}>Save</Button>
+        </div>
+      </div>
+
+      <div className={classes.ingredientsTable}>
+        <IngredientsTable ingredientsWithMeasures={ingredientsWithMeasures}/>
+      </div>
         <div className={classes.instrutions}>
         <Title>Instructions</Title>
-        {data.strInstructions.split('.').filter((sentence)=> sentence !== "").map((sentece)=>(
-          <PointText>
-            {sentece}
+        {data.strInstructions.split('.').filter((sentence)=> sentence !== "").map((sentence)=>(
+          <PointText key={sentence}>
+            {sentence}
             .
           </PointText>
         ))}
         </div>
-      </div>
     </div>
   )
 }
