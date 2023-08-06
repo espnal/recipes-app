@@ -11,7 +11,7 @@ import PointText from  '../../components/text/PointText';
 import IngredientsTable from '../../components/mealspage/IngredientsTable';
 import {Button} from '../../components/buttons/Button';
 import toast from 'react-hot-toast';
-
+import { FaHeartBroken, FaHeart } from 'react-icons/fa';
 const getSingleMeal = async ({queryKey}) => {
 
     const {data} = await axios.get(`/lookup.php?i=${queryKey[1]}`)
@@ -66,13 +66,15 @@ function singleMealPage() {
         savedMeals.push(data.idMeal);
         localStorage.setItem('savedMeals', JSON.stringify(savedMeals));
         toast.success('Meal Saved Successfully');
+        setIsSaved(true)
       } else {
         const updatedMeals = savedMeals.filter((meal) => meal !== data.idMeal);
         localStorage.setItem('savedMeals', JSON.stringify(updatedMeals));
         toast.error('Meal Removed Successfully');
+        setIsSaved(false)
       }
     
-      setIsSaved(!savedMeals.includes(data.idMeal));
+      // setIsSaved(!savedMeals.includes(data.idMeal));
     };
     
   return (
@@ -99,7 +101,20 @@ function singleMealPage() {
             {' '}
             {data?.strTags?.split(',').join(', ')}
           </PointText>
-          <Button variant="primary" className={classes.saveButton} onClick={handleSaveButton}>Save</Button>
+          <Button variant="primary" className={classes.saveButton} onClick={handleSaveButton}>
+            {isSaved ? (
+            <>
+            <FaHeartBroken className={classes.saveIcon}></FaHeartBroken>
+            Remove
+            </>)
+            :
+            (
+              <>
+              <FaHeart className={classes.saveIcon}></FaHeart>
+              Save
+              </>
+            )}
+          </Button>
         </div>
       </div>
 

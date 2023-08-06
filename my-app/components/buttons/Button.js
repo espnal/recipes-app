@@ -12,9 +12,9 @@ function ButtonWithLink({link = "/", children, variant="secondary"}) {
     </Link>
   )
 }
-function Button({children, variant="secondary", onClick}) {
+function Button({children, variant="secondary", className, onClick}) {
     return (
-      <button type="button" className={clsx(classes.button, classes[`variant__${variant}`])} onClick={onClick}>
+      <button type="button" className={clsx(classes.button, className, classes[`variant__${variant}`])} onClick={onClick}>
         {children}
       </button>
     )
