@@ -4,8 +4,8 @@ import Layout from '../components/layout/layout';
 import {Toaster} from "react-hot-toast";
 import {ReactQueryDevtools} from "@tanstack/react-query-devtools"
 import '../styles/globals.css';
-
-axios.defaults.baseURL = 'https://www.themealdb.com/api/json/v1/1/';
+import { getSingleMeal } from './meals/[id]';
+import { useEffect } from 'react';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -16,7 +16,19 @@ const queryClient = new QueryClient({
   },
 });
 
+axios.defaults.baseURL = 'https://www.themealdb.com/api/json/v1/1/';
+
 function App({ Component, pageProps }) {
+  useEffect(() => {
+    if (localStorage.getItem('savedMeals')) {
+      const savedMeals = JSON.parse(localStorage.getItem('savedMeals'));
+      savedMeals.forEach((mealId) => {
+        queryClient.prefetchQuery(['singleMeal', mealId], getSingleMeal);
+      });
+    } else {
+      localStorage.setItem('savedMeals', JSON.stringify([]));
+    }
+  }, []);
   return (
   <QueryClientProvider client={queryClient}>
     <Toaster

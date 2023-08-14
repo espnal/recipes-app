@@ -19,7 +19,7 @@ return (
                 </Link>
             </li>
             <li>
-                <Link href={"/meals"}>
+                <Link href={"/meals/savedMeals"}>
                     Saved List
                 </Link>
             </li>
