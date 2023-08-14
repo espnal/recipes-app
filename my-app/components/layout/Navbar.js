@@ -20,7 +20,7 @@ return (
             </li>
             <li>
                 <Link href={"/meals"}>
-                    Saved lists
+                    Saved List
                 </Link>
             </li>
 

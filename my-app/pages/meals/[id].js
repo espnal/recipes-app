@@ -12,7 +12,7 @@ import IngredientsTable from '../../components/mealspage/IngredientsTable';
 import {Button} from '../../components/buttons/Button';
 import toast from 'react-hot-toast';
 import { FaHeartBroken, FaHeart } from 'react-icons/fa';
-const getSingleMeal = async ({queryKey}) => {
+export const getSingleMeal = async ({queryKey}) => {
 
     const {data} = await axios.get(`/lookup.php?i=${queryKey[1]}`)
     return data?.meals?.[0];
@@ -101,16 +101,22 @@ function singleMealPage() {
             {' '}
             {data?.strTags?.split(',').join(', ')}
           </PointText>
+          {isSaved &&(
+          <Text className={classes.greenText}>You already saved the meal</Text>
+          )}
+          
           <Button variant="primary" className={classes.saveButton} onClick={handleSaveButton}>
             {isSaved ? (
             <>
             <FaHeartBroken className={classes.saveIcon}></FaHeartBroken>
+            {" "}
             Remove
             </>)
             :
             (
               <>
               <FaHeart className={classes.saveIcon}></FaHeart>
+              {" "}
               Save
               </>
             )}
