@@ -1,5 +1,6 @@
 .navbar {
 	display: flex;
+
 	justify-content: space-between;
 	align-items: center;
 	padding: 1rem 0;
@@ -18,5 +19,19 @@
 	a {
 		font-size: 1.8rem;
 		display: inline-block;
+	}
+}
+@media only screen and (max-width: 768px) {
+	.navbar {
+		display: flex;
+		flex-wrap: wrap;
+		text-align: center;
+		align-items: flex-start;
+		padding: 1rem 0;
+		justify-content: initial;
+		flex-direction: column;
+	}
+	.navLinks {
+		margin-left: 40%;
 	}
 }

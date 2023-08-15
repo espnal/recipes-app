@@ -7,18 +7,12 @@ function About() {
   return (
     <div className={classes.about}>
         <Title>What is Nayi Recipes</Title>
-        <Text>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur est 
-            animi odio rem accusamus beatae tempora modi, quos incidunt dolorum ut ipsam 
-            aliquam tenetur error facere fuga assumenda fugit impedit!
-            <br/>
-            <br/>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod fugit animi quisquam 
-            rem. Voluptates placeat cumque corrupti vero veniam? Obcaecati quaerat id maxime quam 
-            laudantium aliquid repudiandae quos molestiae provident.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex eius maxime nostrum 
-            reprehenderit, deserunt commodi quis aut voluptatum! Eius, necessitatibus quo vel 
-            quam harum exercitationem fugit delectus fugiat optio aperiam?
+        <Text>Explore our extensive collection of meticulously selected recipes to suit all tastes and occasions. From classic dishes that will evoke nostalgia to innovative creations that will awaken your palate, Nayi Recipes is the place where tradition and modernity merge in harmony.
+            
             </Text>
+            <Text>Feeling inspired to cook like a real chef? Whether you are an enthusiastic beginner or an experienced cook, our detailed and easy-to-follow recipes will guide you every step of the way. We provide you with helpful tips, culinary techniques and cooking secrets that will turn you into a master of the kitchen.
+
+Plus, at Nayi Recipes, we don't just share recipes, we share stories. Discover the origin of each dish, the special ingredients that make it unique and the anecdotes that surround it. Immerse yourself in the rich culinary culture behind every bite and connect with the passion that brings people together through food.</Text>
     </div>
   )
 }
