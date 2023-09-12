@@ -1,3 +1,6 @@
-.vscode
+# Ignorar la carpeta .vscode
+.vscode/
+
+# Ignorar los archivos package-lock.json y package.json
 package-lock.json
 package.json
