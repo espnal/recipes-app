@@ -6,3 +6,8 @@
 .title {
 	margin-bottom: 1rem;
 }
+@media only screen and (max-width: 768px) {
+	.justifyText {
+		text-align: justify;
+	}
+}

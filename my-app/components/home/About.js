@@ -4,16 +4,11 @@ import Title from '../text/Title';
 import Text from '../text/Text';
 
 function About() {
-  const customStyles = {
-    '@media only screen and (max-width: 768px)': {
-        textAlign: 'justify',
-        Color: "red",
-    }
-  };
+
   return (
     <div className={classes.about}>
         <Title>What is Nayi Recipes</Title>
-        <Text extraStyles={customStyles}>
+        <Text className={classes.justifyText}>
           Explore our extensive collection of 
           meticulously selected recipes to suit all 
           tastes and occasions. From classic dishes that 
@@ -22,7 +17,7 @@ function About() {
           the place where tradition and modernity merge 
           in harmony.
         </Text>
-        <Text extraStyles={customStyles}>
+        <Text  className={classes.justifyText}>
           Feeling inspired to cook like a real chef? 
           Whether you are an enthusiastic beginner or 
           an experienced cook, our detailed and 
